@@ -15,10 +15,18 @@ function Square(props) {
 }
 
 class Board extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.renderSquare = this.renderSquare.bind(this);
+    this.renderDiv = this.renderDiv.bind(this);
+  }
+
   renderSquare(i) {
     const isWin = this.props.linesWinner && this.props.linesWinner.includes(i); 
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         winner={isWin}
@@ -26,24 +34,23 @@ class Board extends React.Component {
     );
   }
 
+  renderDiv(counter) {
+    let renderRows = counter => {
+      let rows = [];
+      for (let i = 0; i < 3 ; i ++) {
+        rows.push(this.renderSquare(counter));
+        counter += 1;
+      }
+      return (rows);
+    }
+    return (<div key={counter} className='board-row'> {renderRows(counter)} </div>);
+  }
+
   render() {
+    let rows = [0, 3, 6];
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+      <div key="first">
+        {rows.map(this.renderDiv)}
       </div>
     );
   }

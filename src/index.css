@@ -56,3 +56,7 @@ ol, ul {
 .showbold {
   font-weight: bold;
 }
+
+.winner {
+  background-color: green;
+}

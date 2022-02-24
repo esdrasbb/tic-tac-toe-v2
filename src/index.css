@@ -36,6 +36,10 @@ ol, ul {
   outline: none;
 }
 
+.square:hover {
+  background-color: #ddd;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }
@@ -47,4 +51,8 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+}
+
+.showbold {
+  font-weight: bold;
 }

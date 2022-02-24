@@ -6,7 +6,7 @@ function Square(props) {
   return (
     <button
       className="square"
-      onClick={props.onClick}
+      onClick={props.onClick} 
     >
       {props.value}
     </button>
@@ -53,6 +53,7 @@ class Game extends React.Component {
       history: [{ squares: Array(9).fill(null) }],
       xIsNext: true,
       stepNumber: 0,
+      selectedMove: null,
     };
   }
 
@@ -70,6 +71,7 @@ class Game extends React.Component {
       }]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
+      selectedMove: null,
     });
   }
 
@@ -77,6 +79,7 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+      selectedMove: step,
     });
   }
 
@@ -89,9 +92,10 @@ class Game extends React.Component {
       const desc = move ? 
         'Go to move #' + move :
         'Go to game start';
+      const isBoldActived = this.state.selectedMove === move ? 'showbold' : '';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className={isBoldActived} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
